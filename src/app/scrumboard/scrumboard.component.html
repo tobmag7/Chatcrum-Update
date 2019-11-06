@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+    <link type="text/css" href="/signup.component.css">
+	<title>Scrumboard Page</title>
+</head>
+<body>
+		<div class="nav">
+				<nav>
+					<b><a routerLink = '/createproject'> Click To Create New Project</a></b>
+				
+				</nav>
+		</div>
+	<div style="margin: 10px;">
+
+	<div  class="row table mt-3">
+		<div class="col">
+			<h4>Tasks For The Week</h4>
+			<div cdkDropList #tftwList="cdkDropList" [cdkDropListData]="TFTW" [cdkDropListConnectedTo]="[tftdList, verifyList, doneList]" class="example-list" (cdkDropListDropped)="drop($event)">
+    			<div class="example-box" *ngFor="let item of TFTW" cdkDrag [cdkDragData]="item">
+					<strong>{{item[0]}}</strong><br>
+					<strong>Task: </strong>{{item[1]}}<br>
+					<strong>Status: </strong>{{item[2]}}<br>
+    			</div>
+  			</div>
+		</div> <br>
+
+		<div class="col">
+			<h4>Tasks For The Day</h4>
+			<div cdkDropList #tftdList="cdkDropList" [cdkDropListData]="TFTD" [cdkDropListConnectedTo]="[tftwList, verifyList, doneList]" class="example-list" (cdkDropListDropped)="drop($event)">
+    			<div class="example-box" *ngFor="let item of TFTD" cdkDrag [cdkDragData]="item">
+					<strong>{{item[0]}}</strong><br>
+					<strong>Task: </strong>{{item[1]}}<br>
+					<strong>Status: </strong>{{item[2]}}<br>
+    			</div>
+  			</div>
+		</div> <br>
+
+		<div class="col">
+			<h4>Verified Tasks</h4>
+			<div cdkDropList #verifyList="cdkDropList" [cdkDropListData]="verify" [cdkDropListConnectedTo]="[tftwList, tftdList, doneList]"
+				class="example-list" (cdkDropListDropped)="drop($event)">
+				<div class="example-box" *ngFor="let item of verify" cdkDrag [cdkDragData]="item">
+					<strong>{{item[0]}}</strong><br>
+					<strong>Task: </strong>{{item[1]}}<br>
+					<strong>Status: </strong>{{item[2]}}<br>
+				</div>
+			</div>
+		</div> <br>
+
+		<div class="col">
+			<h4>Done Tasks</h4>
+			<div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[tftwList, tftdList, verifyList, doneList]" class="example-list" (cdkDropListDropped)="drop($event)">
+    			<div class="example-box" *ngFor="let item of done" cdkDrag [cdkDragData]="item">
+					<strong>{{item[0]}}</strong><br>
+					<strong>Task: </strong>{{item[1]}}<br>
+					<strong>Status: </strong>{{item[2]}}<br>
+    			</div>
+  			</div>
+		</div>
+	</div>
+</div>
+
+	<div>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	</div>
+
+
+</body>
+</html>

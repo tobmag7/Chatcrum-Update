@@ -1,0 +1,29 @@
+<br>
+<div class="container-fluid">
+        <table class="table">
+          <tr>
+            <th>User</th>
+            <th>Admin</th>
+            <th>Quality Analyst</th>
+            <th>Developer</th>
+          </tr>
+          <tr *ngFor="let participant of participants">
+            <td>{{ participant['user']['nickname'] }}</td>
+            <td cdkDropList #role_owner="cdkDropList" [cdkDropListData]="owner"
+            [cdkDropListConnectedTo]="[role_quality_analyst, role_developer]" (cdkDropListDropped)="drop($event)">
+              <div  *ngIf="participant['role'] === 'Owner'" [cdkDragData]="participant" cdkDrag> {{ participant['role'] }} </div> 
+            </td>
+            <td cdkDropList #role_quality_analyst="cdkDropList" [cdkDropListData]="qualityAnalyst"
+            [cdkDropListConnectedTo]="[role_owner, role_developer]" (cdkDropListDropped)="drop($event)">
+              <div  *ngIf="participant['role'] === 'Quality Analyst'" [cdkDragData]="participant" cdkDrag> {{ participant['role'] }} </div> 
+            </td>
+            <td cdkDropList #role_developer="cdkDropList" [cdkDropListData]="developer"
+            [cdkDropListConnectedTo]="[role_quality_analyst, role_owner]" (cdkDropListDropped)="drop($event)">
+              <div  *ngIf="participant['role'] === 'Developer'" [cdkDragData]="participant" cdkDrag> {{ participant['role'] }} </div> 
+            </td>
+            
+    
+          </tr>
+    
+        </table>
+    </div>

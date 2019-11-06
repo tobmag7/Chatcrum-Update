@@ -1,0 +1,48 @@
+<br>
+<br>
+<br>
+<div class="container-fluid">
+    <h2>Login Into Account</h2>
+    <br>
+    <h5>{{ feedback }}</h5>
+
+
+    <form (ngSubmit)="onLoginSubmit()">
+
+        <div class="form-group">
+            <label><b>Email</b></label>
+            <input type="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [class.is-invalid]="email.invalid && email.touched" #email='ngModel' name="email" class="form-control" placeholder="Enter Email" [(ngModel)]='scrumUserLoginData.email' required>
+            <div *ngIf="email.errors && (email.invalid || email.touched)">
+                <small class="text-danger" [class.d-none]="email.valid || email.untouched" *ngIf="email.errors.required">Your Email Is Required</small>
+                <small class="text-danger" [class.d-none]="email.valid || email.untouched" *ngIf="email.errors.pattern">Your Email must contain the "@" and a "domain.com" </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label><b>Password</b></label>
+            <input type="password"  pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$" [class.is-invalid]="password.invalid && password.touched" #password='ngModel' name="password" class="form-control" placeholder="Enter Password" [(ngModel)]='scrumUserLoginData.password' required>
+            <div *ngIf="password.errors && (password.invalid || password.touched)">
+                <small class="text-danger" [class.d-none]="password.valid || password.untouched" *ngIf="password.errors.required">Your Password Is Required</small>
+                <small class="text-danger" [class.d-none]="password.valid || password.untouched" *ngIf="password.errors.pattern">Your Password must be 8-15 characters long and contain at least one number, one lowercase letter, and one uppercase letter and a special character</small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label><b>Project Name</b></label>
+            <input type="text" #projname='ngModel' [class.is-invalid]="projname.invalid && projname.touched" name="projname" class="form-control" placeholder="Enter Name Of Project" [(ngModel)]='scrumUserLoginData.projname' required>
+            <div *ngIf="projname.errors && (projname.invalid || projname.touched)">
+                <small class="text-danger" [class.d-none]="projname.valid || projname.untouched" *ngIf="projname.errors.required">Your Project Name Is Required</small>
+            </div>
+        </div>
+
+        
+        <button class="btn btn-primary" type="submit">Click To Login</button>
+        <div>
+            <input type="checkbox" checked="checked" name="remember"> Remember me
+          ||
+            <span class="psw">Forgot <a href="#">password?</a></span>
+          ||
+            <span> No account with us yet? <a routerLink = '/signup'>Click here to create one</a></span>
+        </div>
+    </form>
+</div>

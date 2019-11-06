@@ -1,0 +1,39 @@
+<br>
+<div class="container-fluid">
+    <span id="alert"></span>
+
+    <h2 class="create-project-header">Create New Project</h2>
+
+    <h4>{{ feedback }}</h4>
+
+  <form #CreateProject="ngForm" name="createProject" novalidate (ngSubmit)="onProjectSubmit()">
+      <div class="form-group">
+          <label><b>Fullname</b></label>
+          <input type="text" #fullname='ngModel' [class.is-invalid]="fullname.invalid && fullname.touched" name="fullname" class="form-control" placeholder="Enter Fullname" [(ngModel)]='createProjectModel.fullname' required>
+          <div *ngIf="fullname.errors && (fullname.invalid || fullname.touched)">
+              <small class="text-danger" [class.d-none]="fullname.valid || fullname.untouched" *ngIf="fullname.errors.required">Your Fullname Is Required</small>
+          </div>
+      </div>
+
+      <div class="form-group">
+          <label><b>Email</b></label>
+          <input type="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [class.is-invalid]="email.invalid && email.touched" #email='ngModel' name="email" class="form-control" placeholder="Enter Email" [(ngModel)]='createProjectModel.email' required>
+          <div *ngIf="email.errors && (email.invalid || email.touched)">
+              <small class="text-danger" [class.d-none]="email.valid || email.untouched" *ngIf="email.errors.required">Your Email Is Required</small>
+              <small class="text-danger" [class.d-none]="email.valid || email.untouched" *ngIf="email.errors.pattern">Your Email must contain the "@" and a "domain.com" </small>
+          </div>
+      </div>
+
+      <div class="form-group">
+          <label><b>Project Name</b></label>
+          <input type="text" #projname='ngModel' [class.is-invalid]="projname.invalid && projname.touched" name="projname" class="form-control" placeholder="Enter Project Name" [(ngModel)]='createProjectModel.projname' required>
+          <div *ngIf="projname.errors && (projname.invalid || projname.touched)">
+              <small class="text-danger" [class.d-none]="projname.valid || projname.untouched" *ngIf="projname.errors.required">Your Project Name Is Required</small>
+          </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">Create New Project</button>
+  </form>
+</div>
+
+

@@ -1,0 +1,59 @@
+<br>
+<br>
+<div class="container-fluid">
+    <h2>Create A New Account</h2>
+
+    <br>
+
+    <h4>{{ feedback }}</h4>
+
+    
+
+
+    <form #userSignupForm="ngForm" novalidate (ngSubmit)="onSubmit()">
+
+        <div class="form-group">
+            <label><b>Fullname</b></label>
+            <input type="text" #fullname='ngModel' [class.is-invalid]="fullname.invalid && fullname.touched" name="fullname" class="form-control" placeholder="Enter Fullname" [(ngModel)]='scrumUserModel.fullname' required>
+            <div *ngIf="fullname.errors && (fullname.invalid || fullname.touched)">
+                <small class="text-danger" [class.d-none]="fullname.valid || fullname.untouched" *ngIf="fullname.errors.required">Your Fullname Is Required</small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label><b>Email</b></label>
+            <input type="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [class.is-invalid]="email.invalid && email.touched" #email='ngModel' name="email" class="form-control" placeholder="Enter Email" [(ngModel)]='scrumUserModel.email' required>
+            <div *ngIf="email.errors && (email.invalid || email.touched)">
+                <small class="text-danger" [class.d-none]="email.valid || email.untouched" *ngIf="email.errors.required">Your Email Is Required</small>
+                <small class="text-danger" [class.d-none]="email.valid || email.untouched" *ngIf="email.errors.pattern">Your Email must contain the "@" and a "domain.com" </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label><b>Password</b></label>
+            <input type="password" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$" [class.is-invalid]="password.invalid && password.touched" #password='ngModel' name="password" class="form-control" placeholder="Enter Password" [(ngModel)]='scrumUserModel.password' required>
+            <div *ngIf="password.errors && (password.invalid || password.touched)">
+                <small class="text-danger" [class.d-none]="password.valid || password.untouched" *ngIf="password.errors.required">Your Password Is Required</small>
+                <small class="text-danger" [class.d-none]="password.valid || password.untouched" *ngIf="password.errors.pattern">Your Password must be 8-15 characters long and contain at least one number, one lowercase letter, and one uppercase letter and a special character</small>
+            </div>
+        </div>
+
+
+
+        <div class="form--group">
+            <label><b>User Type</b></label>
+            <select class="custom-select" name="usertype" [(ngModel)]='scrumUserModel.usertype'>
+                <option value=''>I am signing in as <a href=""></a></option>
+                <option *ngFor="let type of userTypes">{{ type }}</option>
+            </select>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Create New Account</button>
+
+        <div>
+            <span>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</span>
+            ||
+            <span> Have account with us already? <a routerLink = '/login'>Click here to login</a></span>
+        </div>
+    </form>
+</div>
